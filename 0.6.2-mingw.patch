@@ -1,0 +1,28 @@
+--- origsrc/libqxt-libqxt-dadc327c2a6a/config.tests/db/db.pro	2011-11-24 16:10:32.000000000 -0600
++++ src/libqxt-libqxt-dadc327c2a6a/config.tests/db/db.pro	2014-02-16 13:30:35.701216600 -0600
+@@ -4,5 +4,5 @@ TARGET =
+ DEPENDPATH += .
+ INCLUDEPATH += .
+ SOURCES += main.cpp
+-!win32:LIBS+=-ldb
++LIBS+=-ldb
+ QT=core
+--- origsrc/libqxt-libqxt-dadc327c2a6a/configure	2011-11-24 16:10:32.000000000 -0600
++++ src/libqxt-libqxt-dadc327c2a6a/configure	2014-02-16 13:33:42.088877400 -0600
+@@ -249,7 +249,7 @@ configtest()
+     [ -f ./$1 ] && rm ./$1
+     echo -n "."
+     $MAKE >>$CONFIG_LOG 2>&1 >>$CONFIG_LOG 2>&1
+-    if [ -x $1 ] ; then
++    if [ -x $1 -o -x release/$1 ] ; then
+         echo -e >&2 "  [${C_GREEN}success${C_NONE}] "
+         echo "DEFINES+=HAVE_$2">>$QMAKE_CACHE
+     else
+--- origsrc/libqxt-libqxt-dadc327c2a6a/src/berkeley/berkeley.pro	2011-11-24 16:10:32.000000000 -0600
++++ src/libqxt-libqxt-dadc327c2a6a/src/berkeley/berkeley.pro	2014-02-16 13:29:38.463942800 -0600
+@@ -7,4 +7,4 @@ CONVENIENCE     += $$CLEAN_TARGET
+ include(berkeley.pri)
+ include(../qxtbase.pri)
+ 
+-!win32:LIBS     += -ldb
++LIBS     += -ldb

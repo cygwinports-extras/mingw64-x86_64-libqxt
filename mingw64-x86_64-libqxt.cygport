@@ -1,0 +1,27 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross qt4-qmake
+
+NAME="mingw64-x86_64-libqxt"
+VERSION=0.6.2
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Qt extension library for Win64 toolchain"
+DESCRIPTION="LibQxt is an extension library for Qt providing a suite of cross-
+platform utility classes to add functionality not readily available in the Qt
+toolkit."
+HOMEPAGE="http://libqxt.org/"
+#SRC_URI="http://dev.libqxt.org/libqxt/get/v${VERSION}.tar.bz2"
+SRC_URI="libqxt-${VERSION}.tar.bz2"
+SRC_DIR="libqxt-libqxt-dadc327c2a6a"
+PATCH_URI="0.6.2-mingw.patch"
+
+src_compile() {
+	cd ${B}
+	${S}/configure \
+		-prefix ${CROSS_PREFIX} \
+		-headerdir ${QT4_INCLUDEDIR} \
+		-qmake-bin ${QT4_QMAKE} \
+		-nomake docs -nomake designer
+	cygqmake4 ${S}/libqxt.pro
+	cygmake
+}
